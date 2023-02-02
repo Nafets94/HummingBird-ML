@@ -194,6 +194,58 @@ public class HummingBirdAgent : Agent
     }
 
     /// <summary>
+    /// When Behavior Type is set to "Heuristic Only" on the agent's Behavior Parameters,
+    /// this function will be called. Its return values will be fed into
+    /// <see cref="OnActionReceived(ActionBuffers)"/> instead of using the neural network.
+    /// </summary>
+    /// <param name="actionsOut">An output action array</param>
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        base.Heuristic(actionsOut);
+
+        // Create placeholders for all movement/turning
+        Vector3 forward = Vector3.zero;
+        Vector3 left = Vector3.zero;
+        Vector3 up = Vector3.zero;
+        float pitch = 0f;
+        float yaw = 0f;
+
+        // Convert keyboard inputs to movement and turning
+        // All values should be between -1 and +1
+
+        // Forward/backward
+        if (Input.GetKey(KeyCode.W)) forward = transform.forward;
+        else if (Input.GetKey(KeyCode.S)) forward = -transform.forward;
+
+        // Left/right
+        if (Input.GetKey(KeyCode.A)) left = -transform.right;
+        else if (Input.GetKey(KeyCode.D)) left = transform.right;
+
+        // Up/down
+        if (Input.GetKey(KeyCode.E)) up = transform.up;
+        else if (Input.GetKey(KeyCode.C)) up = transform.up;
+
+        // Pitch up/down
+        if (Input.GetKey(KeyCode.UpArrow)) pitch = 1f;
+        else if (Input.GetKey(KeyCode.DownArrow)) pitch = -1f;
+
+        // Turn left/right
+        if (Input.GetKey(KeyCode.LeftArrow)) yaw = -1f;
+        else if (Input.GetKey(KeyCode.RightArrow)) yaw = 1f;
+
+        // Combine the movement vectors and normalize
+        Vector3 combined = (forward + left + up).normalized;
+
+        // Add the 3 movement values, pitch, and yaw to the actionsOut array
+        var continuousActionsOut = actionsOut.ContinuousActions;
+        continuousActionsOut[0] = combined.x;
+        continuousActionsOut[1] = combined.y;
+        continuousActionsOut[2] = combined.z;
+        continuousActionsOut[3] = pitch;
+        continuousActionsOut[4] = yaw;
+    }
+
+    /// <summary>
     /// Move the agent to a safe random position (i.e. does not collide with anything)
     /// If in front of flower, also point the beak at the flower
     /// </summary>
