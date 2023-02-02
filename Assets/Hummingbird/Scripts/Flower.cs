@@ -63,4 +63,50 @@ public class Flower : MonoBehaviour
             return NectarAmount > 0f;
         }
     }
+
+    /// <summary>
+    /// Attempts to remove nectar from the flower
+    /// </summary>
+    /// <param name="amount">The amount of nectar to remove</param>
+    /// <returns>The actual amount succesfully removed</returns>
+    public float Feed(float amount)
+    {
+        // Track how much nectar was successfully taken taken (cannot take more than is available)
+        float nectarTaken = Mathf.Clamp(amount, 0f, NectarAmount);
+
+        // Subtract the nectar
+        NectarAmount -= amount;
+
+        if (NectarAmount < 0f)
+        {
+            // No nectar remaining
+            NectarAmount = 0;
+
+            // Disable the flower and nectar colliders
+            flowerCollider.gameObject.SetActive(false);
+            nectarCollider.gameObject.SetActive(false);
+
+            // Change the flower color to indicate that it is empty
+            flowerMaterial.SetColor("_BaseColor", emptyFlowerColor);
+        }
+
+        // Return the amount of nectar that was taken
+        return nectarTaken;
+    }
+
+    /// <summary>
+    /// Resets the flower
+    /// </summary>
+    public void ResetFlower()
+    {
+        // Refill the nectar
+        NectarAmount = 1f;
+
+        // Enable the flower and nectar colliders
+        flowerCollider.gameObject.SetActive(true);
+        nectarCollider.gameObject.SetActive(true);
+
+        // Change the flower color to indicate that it is full
+        flowerMaterial.SetColor("_BaseColor", fullFlowerColor);
+    }
 }
