@@ -407,7 +407,7 @@ public class HummingBirdAgent : Agent
                     float bonus = .02f * Mathf.Clamp01(Vector3.Dot(transform.forward.normalized,
                                                                     -nearestFlower.FlowerUpVector.normalized));
 
-                    AddReward(.01f + bonus);
+                    AddReward(.02f + bonus);
                 }
 
                 // If flower is empty, update the nearest flower
