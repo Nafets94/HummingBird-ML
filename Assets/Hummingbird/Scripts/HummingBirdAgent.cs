@@ -125,9 +125,9 @@ public class HummingBirdAgent : Agent
         if (frozen) return;
 
         // Calculate movement vector
-        Vector3 move = new Vector3(actions.DiscreteActions[0],
-                                   actions.DiscreteActions[1],
-                                   actions.DiscreteActions[2]);
+        Vector3 move = new Vector3(actions.ContinuousActions[0],
+                                   actions.ContinuousActions[1],
+                                   actions.ContinuousActions[2]);
 
         // Add force in the direction of the move vector
         rigidbody.AddForce(move * moveForce);
@@ -136,8 +136,8 @@ public class HummingBirdAgent : Agent
         Vector3 rotationVector = transform.rotation.eulerAngles;
 
         // Calculate pitch and yaw rotations
-        float pitchChange = actions.DiscreteActions[3];
-        float yawChange = actions.DiscreteActions[4];
+        float pitchChange = actions.ContinuousActions[3];
+        float yawChange = actions.ContinuousActions[4];
 
         // Calculate smooth rotation changes
         smoothPitchChange = Mathf.MoveTowards(smoothPitchChange, pitchChange, 2f * Time.fixedDeltaTime);

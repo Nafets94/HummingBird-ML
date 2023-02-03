@@ -34,7 +34,7 @@ public class FlowerArea : MonoBehaviour
             float yRotation = UnityEngine.Random.Range(-180f, 180f);
             float zRotation = UnityEngine.Random.Range(-5f, 5f);
 
-            flowerPlant.transform.localRotation = Quaternion.Euler(zRotation, xRotation, yRotation);
+            flowerPlant.transform.localRotation = Quaternion.Euler(xRotation, yRotation, zRotation);
         }
 
         // Reset each flower

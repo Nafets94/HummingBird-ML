@@ -137,10 +137,20 @@ PrefabInstance:
       propertyPath: m_TagString
       value: flower_plant
       objectReference: {fileID: 0}
+    - target: {fileID: 3230494491716879710, guid: 423815a9aec87fb48bbb6f0f35a66653,
+        type: 3}
+      propertyPath: m_BehaviorType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4420374660899403437, guid: 423815a9aec87fb48bbb6f0f35a66653,
         type: 3}
       propertyPath: m_Name
       value: FloatingIsland
+      objectReference: {fileID: 0}
+    - target: {fileID: 6978508851379372559, guid: 423815a9aec87fb48bbb6f0f35a66653,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8703149456917459529, guid: 423815a9aec87fb48bbb6f0f35a66653,
         type: 3}
